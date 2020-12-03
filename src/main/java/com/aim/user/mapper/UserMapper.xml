@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+ <mapper namespace="com.aim.user.mapper.UserMapper">
+
+	<!-- idea 中无法使用resultMap，我不知道怎么解决。。。。特么突然自己又可以了，我特么无语....-->
+ 	<resultMap type="com.aim.entity.User" id="user">
+ 		<id property="userId" column="user_id"/>
+ 		<result property="userName" column="user_name"/>
+ 		<result property="userPassword" column="user_password"/>
+ 		<result property="userSex" column="user_sex"/>
+ 		<result property="userPhone" column="user_phone"/>	
+ 	</resultMap>
+ 	
+ 	<!-- 驼峰命名属性会导致mybatis无法匹配数据库字段，因而通过resultType查询到的都为null
+ 		解决办法：1.使用resultMap将POJO类属性与数据库字段匹配起来
+ 				2.mybatis开启驼峰映射
+ 	 -->
+ 	<!-- 查询单个 查询结果：1.resultType-实体类包  2.resultMap-自定义的(可作view类)-->
+ 	<select id="selectUserById" parameterType="int" resultMap="user">
+ 		select
+ 			*
+ 		from
+ 			t_user
+ 		where
+ 			user_id = #{id}
+ 	</select>
+
+
+	<!-- 添加用户 -->
+ 	<insert id="addUser" parameterType="com.aim.entity.User">
+		/*Oracel-获取自增唯一主键userId,
+			1.keyProperty:	属性名--对应数据库的主键
+			2.order:
+			3.resultType:	属性名的类型
+		*/
+		<selectKey keyProperty="userId" order="BEFORE" resultType="int">
+			select seq_t_user.nextval from dual
+		</selectKey>
+		insert into t_user values(
+			#{userId,jdbcType=INTEGER},
+			#{userName,jdbcType=VARCHAR},
+			#{userPassword,jdbcType=VARCHAR},
+			#{userSex,jdbcType=VARCHAR},
+			#{userPhone,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 用户登录 -->
+	<select id="login" parameterType="com.aim.entity.User" resultMap="user">
+		select
+			*
+		from
+			t_user
+		where
+			user_name = #{userName}
+		and
+			user_password = #{userPassword}
+	</select>
+
+ </mapper>
+ 
+ 
