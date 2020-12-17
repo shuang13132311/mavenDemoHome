@@ -9,8 +9,8 @@
 </head>
 <body>
 <a href="login.jsp"><h1>去登录！</h1></a>
-<h1>当前用户:${user.userName }</h1>
-<h1>您的手机号:${user.userPhone }</h1>
+<h1>当前用户:</h1>
+<h1>您的手机号:</h1>
 <a href="contact/addContact.jsp">添加联系人</a>
 <table border="1">
     <tr>
@@ -20,7 +20,7 @@
         <td>操作</td>
     </tr>
     <!-- 遍历出 从后台获取到的当前登陆user的 所有联系人信息，并显示 -->
-    <c:forEach items="${contactList }" var="contact">
+    <%--<c:forEach items="${contactList }" var="contact">
         <tr>
             <td>${contact.contactName }</td>
             <td>${contact.contactSex }</td>
@@ -30,7 +30,7 @@
                 <a href="ContactServlet?method=deleteContactById&contactId=${contact.contactId }&userId=${contact.userId }">删除</a>
             </td>
         </tr>
-    </c:forEach>
+    </c:forEach>--%>
 </table>
 </body>
 </html>

@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/userController")
 public class UserController {
     @Autowired
     private UserService userService;
+
     /*@RequestMapping("selectUserById")
     public String selectUserById(int id, Model model){
         System.out.println("访问了controller");
@@ -20,16 +23,19 @@ public class UserController {
         return "user";
     }*/
 
-    @RequestMapping("/addUser")
-    public String addUser(User user){
+    @RequestMapping(value = "/register")
+    @ResponseBody
+    public String register(@RequestParam String userName,String userPassword,String userSex,String userPhone){
         System.out.println("访问了addUser！！");
-        int flag = userService.addUser(user);
+        System.out.println(userName + userPassword + userSex + userPhone);
+        String jsonStr = "{\"errorCode\":\"00\"}";
+        int flag = 1;
         if(flag != 0){
             System.out.println("添加user成功");
-            return "login";
+            return jsonStr;
         }else{
             System.out.println("添加失败！");
-            return "error";
+            return null;
         }
     }
 

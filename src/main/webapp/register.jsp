@@ -7,22 +7,44 @@
 <title>Insert title here</title>
 </head>
 <%-- 引入jQuery --%>
-<script src="js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script>
 	/*加载jQuery*/
 	$(function(){
+
 		$("#submitBt").click(function (){
-			/*form表单序列化成字符串*/
-			var data = $("#frm").serialize();
-			alert(data);
-			/*Ajax*/
-			$.post(
-					"addUser",			/*访问路径*/
-					data,				/*传入后台的参数*/
-					function (result){
-						alert("111");
-					},"json"
-			)
+			/*form表单序列化成的拼接字符串参数*/
+			/*var strData = $("#frm").serialize();
+			alert(strData);
+			console.log(strData);*/
+
+			/*JSON对象*/
+			var userName = $("#userName").val();
+			var userPassword = $("#userPassword").val();
+			var userSex = $("input[name='userSex']:checked").val();
+			var userPhone = $("#userPhone").val();
+			var jsonData = {"userPhone":userPhone,
+							"userPassword":userPassword,
+							"userName":userName,
+							"userSex":userSex
+							};
+			alert(jsonData);
+			console.log(jsonData);
+			console.log(jsonData.userName);
+			console.log(typeof jsonData);
+
+			$.ajax({
+				type : "post",
+				url : "/userController/register",
+				Data :jsonData,
+				DataType : 'json',
+				success : function (msg){
+					if("00" == msg){
+						alert(msg);
+						/*window.location.href="#";*/
+					}
+				}
+			})
 
 		})
 	})
@@ -31,12 +53,12 @@
 
 <body>
 	<form method="post" id="frm">
-		请输入账户:		<input type="text" name="userName"><br />
-		请输入密码:		<input type="password" name="userPassword" id="p1">
-		请再次请输入密码:	<input type="password" id="p2"><br />
+		请输入账户:		<input type="text" name="userName" id="userName"><br />
+		请输入密码:		<input type="password" name="userPassword" id="userPassword">
+		<%--请再次请输入密码:	<input type="password" id="p2"><br />--%>
 		请选择性别:		<input type="radio" name="userSex" value="男">男
 						<input type="radio" name="userSex" value="女">女<br />
-		请输入电话号码:	<input type="text" name="userPhone">
+		请输入电话号码:	<input type="text" name="userPhone" id="userPhone">
 						<input type="button" value="提交" id="submitBt"> <!-- //提交按钮，并触发前台验证 -->
 	</form>
 </body>

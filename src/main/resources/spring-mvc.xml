@@ -16,7 +16,7 @@
                http://www.springframework.org/schema/mvc
                http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<!-- 开启注解映射的支持(注解驱动)，以使得访问路径与方法的匹配可以通过注解配置（才可以永RequestMapping这样的路径访问到conttoller） -->  
+	<!-- 开启注解映射的支持(注解驱动)，以使得访问路径与方法的匹配可以通过注解配置（才可以通过RequestMapping写路径访问conttoller) -->
 	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,
 		是spring MVC为@Controllers分发请求所必须的，即解决了@Controller注解使用的前提配置。支持json
 		
@@ -49,7 +49,6 @@
 		<property name="prefix" value="/"/>
 		<!-- 配置后缀 -->
 		<property name="suffix" value=".jsp"/>
-
 	</bean>
 
 </beans>

@@ -14,11 +14,12 @@
                http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 
-	<!-- spring配置 -->
-	<!-- 配置spring的扫描器 (注册bean 自动注入)，这里只扫描service层所有模块的实现类  配合(@Component(组件)，@Service（服务），@Controller（控制器），@Repository（数据仓库）使用)-->
+	<!-- Spring配置 -->
+	<!-- 配置Spring的扫描器 (注册bean)，这里只扫描service层所有模块的实现类
+		 这样扫描区域内Spring注解的bean才能被创建 @Service（服务层），@Controller（控制层），@Repository（数据层），@Component(任意层)-->
 	<context:component-scan base-package="com.aim.user.service" />
 
-	<!-- 此行语句使得@resource @autowired 等四个注解可以使用 (自动装配bean)-->
+	<!-- 此行语句使得@resource @autowired 等四个注解可以使用 (Spring 自动装配bean)-->
 	<context:annotation-config />
 
 

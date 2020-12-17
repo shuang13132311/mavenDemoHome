@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>20201110</title>
 </head>
-<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script>
 	$(function(){
 		//跳转到注册界面
@@ -34,7 +34,7 @@
 
 </script>
 <body>
-		<%--for AJAX--%>
+
 		<form method="post" id="frm">
 			用户名:	<input type="text" name="userName">
 			密   码:	<input type="password" name="userPassword">
