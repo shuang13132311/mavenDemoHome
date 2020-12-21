@@ -8,5 +8,5 @@ public interface UserService {
 
     public int addUser(User user);
 
-    public User login(User user);
+    public User login(String userName, String userPassword);
 }

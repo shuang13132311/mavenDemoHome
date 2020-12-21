@@ -6,8 +6,7 @@
  
  <mapper namespace="com.aim.user.mapper.UserMapper">
 
-	<!-- idea 中无法使用resultMap，我不知道怎么解决。。。。特么突然自己又可以了，我特么无语....-->
- 	<resultMap type="com.aim.entity.User" id="user">
+ 	<resultMap type="com.aim.entity.User" id="userMap">
  		<id property="userId" column="user_id"/>
  		<result property="userName" column="user_name"/>
  		<result property="userPassword" column="user_password"/>
@@ -19,8 +18,8 @@
  		解决办法：1.使用resultMap将POJO类属性与数据库字段匹配起来
  				2.mybatis开启驼峰映射
  	 -->
- 	<!-- 查询单个 查询结果：1.resultType-实体类包  2.resultMap-自定义的(可作view类)-->
- 	<select id="selectUserById" parameterType="int" resultMap="user">
+ 	<!-- 查询单个 查询结果：1.resultType-实体类包  2.resultMap-自定义的(可作view object)-->
+ 	<select id="selectUserById" parameterType="int" resultMap="userMap">
  		select
  			*
  		from
@@ -49,7 +48,7 @@
 	</insert>
 
 	<!-- 用户登录 -->
-	<select id="login" parameterType="com.aim.entity.User" resultMap="user">
+	<select id="login" parameterType="String" resultMap="userMap">
 		select
 			*
 		from

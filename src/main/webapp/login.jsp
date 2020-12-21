@@ -11,21 +11,27 @@
 	$(function(){
 		//跳转到注册界面
 		$("#toRegisterBt").click(function(){
-			window.location.href="register.jsp";
+			window.location.href="/register.jsp";
 		})
 
 		//AJAX登录
 		$("#loginBt").click(function(){
-			var formData = $("#frm").serialize();
-			$.post(
-					"login",
-					formData,
-					function (result){
-						console.log(result);
-						alert(result);
-						/*window.location.href="index.jsp";*/
-					},"json"
-			)
+			var userName = $("#userName").val();
+			var userPassword = $("#userPassword").val();
+			var jsonData = {"userName" : userName,
+							"userPassword" : userPassword}
+			$.ajax({
+				type : "post",
+				url : "/userController/login",
+				data : jsonData,
+				dataType : "json",
+				success : function (msg){
+					if("00" == msg.reasonCode) {
+						alert(msg.reasonContext);
+						window.location.href="/toIndex";
+					}
+				}
+			})
 		})
 
 
@@ -36,8 +42,8 @@
 <body>
 
 		<form method="post" id="frm">
-			用户名:	<input type="text" name="userName">
-			密   码:	<input type="password" name="userPassword">
+			用户名:	<input type="text" name="userName" id="userName">
+			密   码:	<input type="password" name="userPassword" id="userPassword">
 					<input type="button" value="登陆" id="loginBt"><br />
 					<input type="button" id="toRegisterBt" value="没有账号?点击注册!">
 		</form>

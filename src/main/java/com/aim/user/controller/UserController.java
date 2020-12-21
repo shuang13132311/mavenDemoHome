@@ -4,9 +4,7 @@ import com.aim.entity.User;
 import com.aim.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -15,24 +13,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /*@RequestMapping("selectUserById")
-    public String selectUserById(int id, Model model){
-        System.out.println("访问了controller");
-        User user = userService.selectUserById(id);
-        model.addAttribute("user", user);
-        return "user";
-    }*/
 
-    @RequestMapping(value = "/register")
+    @RequestMapping("/register")
     @ResponseBody
-    public String register(@RequestParam String userName,String userPassword,String userSex,String userPhone){
-        System.out.println("访问了addUser！！");
-        System.out.println(userName + userPassword + userSex + userPhone);
-        String jsonStr = "{\"errorCode\":\"00\"}";
-        int flag = 1;
+    public String register(User user){
+        System.out.println("访问了register controller！！");
+        System.out.println("参数:" + user);
+        int flag = userService.addUser(user);
         if(flag != 0){
             System.out.println("添加user成功");
-            return jsonStr;
+            String jsonResult = "{\"reasonCode\":\"00\", \"reasonContext\":\"注册成功!\"}";
+            return jsonResult;
         }else{
             System.out.println("添加失败！");
             return null;
@@ -40,20 +31,20 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="/login",produces = {"application/json;charset=UTF-8"})
+    @RequestMapping("/login")
     @ResponseBody
-    public User login(String userName,String userPassword){
-        System.out.println("访问了login！！");
-        User user = new User();
-        user.setUserName(userName);
-        user.setUserPassword(userPassword);
-        User userInfo = userService.login(user);
+    public String login(String userName, String userPassword){
+        System.out.println("访问了login controller！！");
+        System.out.println("参数:" + userName + " / " + userPassword);
+        User userInfo = userService.login(userName, userPassword);
         if(userInfo != null){
             System.out.println("查询到该用户，可以登录");
-            //去查询当前用户的所有联系人信息
-            return userInfo;
+            String jsonResult = "{\"reasonCode\" : \"00\", \"reasonContext\" : \"登录成功！\"}";
+            return jsonResult;
         }else {
-            return null;
+            System.out.println("未查询到该用户");
+            String jsonResult = "{\"reasonCode\" : \"11\", \"reasonContext\" : \"未查询到该用户！\"}";
+            return jsonResult;
         }
     }
 
