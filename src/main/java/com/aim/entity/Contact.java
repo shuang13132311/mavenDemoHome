@@ -46,4 +46,15 @@ public class Contact {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "contactId=" + contactId +
+                ", contactName='" + contactName + '\'' +
+                ", contactSex='" + contactSex + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
 }
