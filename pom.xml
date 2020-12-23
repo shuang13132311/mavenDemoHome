@@ -21,12 +21,7 @@
   </properties>
 
   <dependencies>
-    <!--<dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <version>2.2.3</version>
-      <classifier>jdk15</classifier>
-    </dependency>-->
+    <!--json jar包-->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
@@ -43,12 +38,14 @@
       <version>2.7.3</version>
     </dependency>
 
+    <!--jQuery jar包-->
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>jquery</artifactId>
       <version>3.1.1</version>
     </dependency>
 
+    <!--Oracle jar包-->
     <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc6</artifactId>
@@ -131,6 +128,12 @@
       <version>3.4.1</version>
     </dependency>
 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
     <!-- JSTL标签类 -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -138,6 +141,16 @@
       <version>1.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>3.0.7.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring4</artifactId>
+      <version>3.0.0.RELEASE</version>
+    </dependency>
 
     <!--log4j日志包 -->
     <dependency>
@@ -166,7 +179,17 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.25</version>
+      <scope>compile</scope>
+    </dependency>
+
+
   </dependencies>
+
 
   <build>
     <finalName>mavenDemo</finalName>

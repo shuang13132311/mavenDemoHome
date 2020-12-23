@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/userController")
 public class UserController {
@@ -33,12 +35,13 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String login(String userName, String userPassword){
+    public String login(String userName, String userPassword, HttpSession session){
         System.out.println("访问了login controller！！");
         System.out.println("参数:" + userName + " / " + userPassword);
         User userInfo = userService.login(userName, userPassword);
         if(userInfo != null){
             System.out.println("查询到该用户，可以登录");
+            session.setAttribute("userInfo",userInfo);
             String jsonResult = "{\"reasonCode\" : \"00\", \"reasonContext\" : \"登录成功！\"}";
             return jsonResult;
         }else {
