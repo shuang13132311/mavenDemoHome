@@ -32,6 +32,7 @@ public class JumpControllor {
             System.out.println(contact);
         }
         model.addAttribute("contactList", contactList);
+        model.addAttribute("user", user);
         return "index";
     }
 }
